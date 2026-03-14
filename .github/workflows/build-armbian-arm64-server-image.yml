@@ -342,8 +342,7 @@ jobs:
         if: ${{ steps.init.outputs.status == 'success' && !cancelled() }}
         run: |
           df -hT ${PWD}
-          git clone -q --single-branch --depth=1 --branch=main https://github.com/armbian/build.git build
-          ln -sf /builder/build ${{ github.workspace }}/build
+git clone -q --single-branch --depth=1 --branch=tx6s-main https://github.com/alnahian2011/build.git build          ln -sf /builder/build ${{ github.workspace }}/build
           ln -sf /builder/build /home/runner/work/_actions/ophub/amlogic-s9xxx-armbian/main/build
           echo "status=success" >> ${GITHUB_OUTPUT}
 
@@ -356,8 +355,7 @@ jobs:
           docker run --rm --privileged multiarch/qemu-user-static --reset -p yes 2>/dev/null || true
           # Compile method and parameter description: https://docs.armbian.com/Developer-Guide_Build-Options
           cd build/
-              ./compile.sh RELEASE=${{ inputs.set_release }} BOARD=odroidn2 BRANCH=current BUILD_MINIMAL=no \
-                           BUILD_ONLY=default HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no \
+./compile.sh RELEASE=${{ inputs.set_release }} BOARD=tanix-tx6s-axp313 BRANCH=current BUILD_MINIMAL=no \                           BUILD_ONLY=default HOST=armbian BUILD_DESKTOP=no EXPERT=yes KERNEL_CONFIGURE=no \
                            COMPRESS_OUTPUTIMAGE="sha" SHARE_LOG=yes
           echo "status=success" >> ${GITHUB_OUTPUT}
 
